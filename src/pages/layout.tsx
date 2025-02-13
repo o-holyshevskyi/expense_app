@@ -1,10 +1,9 @@
 import Sidebar from '@/components/common/Sidebar';
 import { useState, useEffect, ReactNode } from 'react';
-import { Avatar, Progress, Image } from '@heroui/react';
+import { Progress } from '@heroui/react';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import Footer from '@/components/common/Footer';
-import { ThemeSwitcher } from '@/components/theme/ThemeSwitcher';
 
 const Layout = ({ children }: { children: ReactNode }) => {
     const router = useRouter();
@@ -13,20 +12,25 @@ const Layout = ({ children }: { children: ReactNode }) => {
     const [value, setValue] = useState(0);
 
     useEffect(() => {
-        if (status === "loading") return; // Wait for session to load
-        if (!session) {
-            router.push("/sign-in"); // Redirect to signin if no session
-        }
-        
-        console.log(session?.user?.image)
+        if (status === "loading") return;
 
+        if (status === "authenticated") {
+            if (session?.user.role === "guest") {
+                router.push("/access-denied");
+            }
+        } else {
+            router.push("/sign-in");
+        }
+    }, [status, session, router]);
+
+    useEffect(() => {
         if (typeof window !== 'undefined') {
             const saved = localStorage.getItem('sidebarState');
             if (saved) {
                 setIsCollapsed(JSON.parse(saved));
             }
         }
-    }, [status, session, router]);
+    }, []);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -52,7 +56,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
                     />
                 </div>
             ) :
-            status === 'authenticated' ?
+            status === 'authenticated' && session?.user.role !== "guest" ?
             (<div className="dark:text-foreground dark:bg-zinc-900 relative flex h-screen bg-gray-100">
                 <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
                 <div
@@ -67,7 +71,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
                 >
                     <Footer />
                 </div>
-            </div>) : <></>}
+            </div>) : <>{children}</>}
         </div>
     );
 };
