@@ -1,0 +1,16 @@
+{
+    "users": {
+        "holyshevskyi.a@gmail.com": {
+            "groups": ["admin"],
+            "permissions": ["read", "write", "delete"]
+        },
+        "holyshevskyi.o@gmail.com": {
+            "groups": ["user"],
+            "permissions": ["read", "write"]
+        }
+    },
+    "groups": {
+        "admin": ["manage_users", "full_access"],
+        "user": ["read_content", "edit_content"]
+    }
+}
