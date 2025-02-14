@@ -60,7 +60,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
             (<div className="dark:text-foreground dark:bg-zinc-900 relative flex h-screen bg-gray-100">
                 <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
                 <div
-                    className={`flex-1 ml-${isCollapsed ? '10' : '60'} transition-all duration-500 ease-in-out p-6 pl-10`}
+                    className={`flex-1 ${isCollapsed ? 'ml-10' : 'ml-60'} transition-all duration-500 ease-in-out p-6 pl-10`}
                 >
                     <div className="dark:text-foreground dark:bg-zinc-800 bg-white shadow-lg rounded-2xl p-6 h-full overflow-auto scrollbar-hide">
                         {children}
