@@ -2,56 +2,59 @@ import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, User as UiUser }
 import { handleGoogleSignOut } from '@/actions/sign-in-action';
 import { LogOutIcon, SettingsIcon } from "../icons/svgIcons";
 import { useSession } from "next-auth/react";
+import { getTranslation, Locale } from "@/lib/i18n";
+import { NextRouter, useRouter } from "next/router";
 
 type UserProps = {
   email: string;
   name: string;
   image: string;
   signedAs: string;
+  locale: Locale;
 };
 
-const userDropDownItems = (signedAs: string, group: string[]) => [
-    {
-        key: 'profile',
-        color: undefined as "danger" | "default" | "primary" | "secondary" | "success" | "warning" | undefined,
-        startContent: <></>,
-        onPress: () => {},
-        assignedGroups: ["admin", "user"],
-        child: 
-        <>
-            <p className="font-bold">{signedAs} signed in as</p>
-            <p className={`
-                text-tiny font-bold items-center justify-center 
-                ${group.includes('admin') ? 'text-green-400' : 'text-amber-800'}
-            `}>
-                @{group.join(', ')}
-            </p>
-        </>,
-    },
-    {
-        key: 'settings',
-        color: undefined as "danger" | "default" | "primary" | "secondary" | "success" | "warning" | undefined,
-        startContent: <SettingsIcon />,
-        onPress: () => alert("Settings clicked"), // Placeholder action
-        assignedGroups: ["admin"],
-        child: 'Settings',
-    },
-    {
-        key: 'signOut',
-        color: 'danger' as "danger" | "default" | "primary" | "secondary" | "success" | "warning" | undefined,
-        startContent: <LogOutIcon />,
-        onPress: handleGoogleSignOut,
-        assignedGroups: ["admin", "user"],
-        child: 'Sign Out',
-    },
+const userDropDownItems = (signedAs: string, group: string[], locale: Locale, router: NextRouter) => [
+  {
+    key: 'profile',
+    color: undefined as "danger" | "default" | "primary" | "secondary" | "success" | "warning" | undefined,
+    startContent: <></>,
+    onPress: () => {},
+    assignedGroups: ["admin", "user"],
+    child: 
+    <>
+      <p className="font-bold">{signedAs + " " + getTranslation(locale, "user.signedAs")}</p>
+      <p className='text-tiny font-bold items-center justify-center'>
+        @{group.join(', ')}
+      </p>
+    </>,
+    isDisabled: false,
+  },
+  {
+    key: 'settings',
+    color: undefined as "danger" | "default" | "primary" | "secondary" | "success" | "warning" | undefined,
+    startContent: <SettingsIcon />,
+    onPress: () => router.push('/settings'),
+    assignedGroups: ["admin"],
+    child: getTranslation(locale, "user.userDropDownItems[0]"),
+    isDisabled: router.pathname.startsWith('/settings')
+  },
+  {
+    key: 'signOut',
+    color: 'danger' as "danger" | "default" | "primary" | "secondary" | "success" | "warning" | undefined,
+    startContent: <LogOutIcon />,
+    onPress: handleGoogleSignOut,
+    assignedGroups: ["admin", "user"],
+    child: getTranslation(locale, "user.userDropDownItems[1]"),
+    isDisabled: false,
+  },
 ];
 
-export default function User({ email, image, name, signedAs }: UserProps) {
+export default function User({ email, image, name, signedAs, locale }: UserProps) {
   const { data: session } = useSession();
   const userGroups = session?.user?.groups || [];
+  const router = useRouter();
 
-  // Filter dropdown items based on the user's groups
-  const filteredItems = userDropDownItems(signedAs, userGroups).filter(item =>
+  const filteredItems = userDropDownItems(signedAs, userGroups, locale as Locale, router).filter(item =>
     item.assignedGroups.some(group => userGroups.includes(group))
   );
 
@@ -82,10 +85,11 @@ export default function User({ email, image, name, signedAs }: UserProps) {
         <DropdownMenu aria-label="User Actions" variant="flat">
             {filteredItems.map(ddItem => (
                 <DropdownItem
-                    key={ddItem.key}
-                    color={ddItem.color}
-                    startContent={ddItem.startContent}
-                    onPress={ddItem.onPress}
+                  key={ddItem.key}
+                  color={ddItem.color}
+                  startContent={ddItem.startContent}
+                  onPress={ddItem.onPress}
+                  isDisabled={ddItem.isDisabled}
                 >
                     {ddItem.child}
                 </DropdownItem>

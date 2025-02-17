@@ -1,10 +1,16 @@
+import { Locale } from "@/lib/i18n";
 import { navItems } from "@/shared/nav-items";
 import { Card, CardBody } from "@heroui/card";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function Home() {
   const [isMounted, setIsMounted] = useState(false);
+
+  const router = useRouter();
+  const { locale } = router;
+  const navigationItems = navItems(locale as Locale)
 
   useEffect(() => {
     setIsMounted(true);
@@ -16,7 +22,7 @@ export default function Home() {
 
   return (
     <div className="h-[100%] flex flex-wrap justify-center items-center gap-10">
-      {navItems.map((cardItem, index) => (
+      {navigationItems.map((cardItem, index) => (
         <Card
           key={cardItem.id}
           isPressable

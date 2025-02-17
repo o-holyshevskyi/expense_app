@@ -3,12 +3,33 @@ import Google from "next-auth/providers/google";
 import 'dotenv/config.js';
 import fs from 'fs/promises';
 
-const WHITELISTED_EMAILS = [
-    "holyshevskyi.a@gmail.com",
-    "holyshevskyi.o@gmail.com",
-];
+export async function getWhiteListedEmails(): Promise<string[]> {
+  try {
+    const data = await fs.readFile('./whitelisted_emails.json', 'utf-8');
+    const whiteListedEmails = JSON.parse(data);
 
-async function getUserRoles(email: string) {
+    return whiteListedEmails.whiteListedEmails
+      .filter((emailObj: { email: string; isListed: boolean }) => emailObj.isListed)
+      .map((emailObj: { email: string }) => emailObj.email);
+  } catch (error) {
+    console.error('Failed to read whitelisted_emails.json', error);
+    return [];
+  }
+}
+
+
+export type WhiteListedEmails = {
+    id: number;
+    email: string;
+    added: Date;
+    changed: Date;
+    isListed: boolean;
+    roles: {
+        groups: string[];
+    };
+}
+
+export async function getUserRoles(email: string) {
     try {
         const data = await fs.readFile('./roles.json', 'utf-8');
         const roles = JSON.parse(data);
@@ -35,7 +56,8 @@ export const authOptions: NextAuthOptions = {
     callbacks: {
         async jwt({ token }) {
             if (token.email) {
-                if (!WHITELISTED_EMAILS.includes(token.email)) {
+                const whiteListedEmails = await getWhiteListedEmails();
+                if (!whiteListedEmails.includes(token.email)) {
                     token.role = "guest";
                   } else {
                     const roles = await getUserRoles(token.email);
