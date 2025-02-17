@@ -2,7 +2,7 @@ import { Switch } from "@heroui/react";
 import {useTheme} from "next-themes";
 import { SunIcon, MoonIcon } from "../icons/svgIcons";
 
-export const ThemeSwitcher = () => {
+export const ThemeSwitcher = ({ translatedSideBarLabel }: { translatedSideBarLabel: string } ) => {
     const { theme, setTheme } = useTheme()
 
     const handleChange = () => {
@@ -13,13 +13,16 @@ export const ThemeSwitcher = () => {
     }
 
     return (
-        <Switch
-            defaultSelected
-            color="default"
-            size="sm"
-            endContent={<MoonIcon />}
-            startContent={<SunIcon />}
-            onValueChange={handleChange}
-        />
+        <div className="flex items-center gap-4">
+            <Switch
+                defaultSelected
+                color="default"
+                size="sm"
+                endContent={<MoonIcon />}
+                startContent={<SunIcon />}
+                onValueChange={handleChange}
+            />
+            {translatedSideBarLabel}
+        </div>
     )
 };

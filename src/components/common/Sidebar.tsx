@@ -12,26 +12,33 @@ import { Button, Kbd, Tooltip } from '@heroui/react';
 import User from './User';
 import { useSession } from 'next-auth/react';
 import { ThemeSwitcher } from '../theme/ThemeSwitcher';
+import LanguageSwitcher from './LanguageSwitcher';
+import { getTranslation, Locale } from '@/lib/i18n';
 
 type SidebarProps = {
     isCollapsed: boolean;
     setIsCollapsed: (update: (prev: boolean) => boolean) => void;
+    locale: Locale;
 };
 
-const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
+const Sidebar = ({ isCollapsed, setIsCollapsed, locale }: SidebarProps) => {
     const router = useRouter();
     const { pathname } = router;
     const { data: session } = useSession();
 
     const topSidebarMenuItems = [
-        { href: '/', label: 'Home', icon: <HomeIcon />, id: 'home', isDisplayed: isCollapsed },
-        ...navItems,
+        { href: '/', label: 'Home', icon: <HomeIcon width={30} />, id: 'home', isDisplayed: isCollapsed },
+        ...navItems(locale as Locale, { height: isCollapsed ? 30 : 36, width: isCollapsed ? 30 : 36 }),
     ];
 
     const bottomSidebarMenuItems = [
         {
-            reactElement: <ThemeSwitcher />,
+            reactElement: <ThemeSwitcher translatedSideBarLabel={isCollapsed ? '' : getTranslation(locale, "sidebar.sidebarItems[2]")}/>,
             id: 'themeSwithcer'
+        },
+        {
+            reactElement: <LanguageSwitcher translatedSideBarLabel={isCollapsed ? '' : getTranslation(locale, "sidebar.sidebarItems[3]")} />,
+            id: 'languageSwithcer'
         },
         { 
             reactElement: <User
@@ -39,6 +46,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
                 name={!isCollapsed && session?.user?.name || ''}
                 image={session?.user?.image || ''}
                 signedAs={session?.user?.name || ''}
+                locale={locale}
             />, 
             id: 'user' 
         }
@@ -51,11 +59,13 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
         }
     
         const handleKeyPress = (event: KeyboardEvent) => {
+            const hotKey = locale === 'en' ? '[' : '\\';
+            
             if (
                 document.activeElement?.tagName !== 'INPUT' &&
                 document.activeElement?.tagName !== 'TEXTAREA'
             ) {
-                if (event.key === '[') {
+                if (event.key === hotKey) {
                     handleIsCollapsed();
                 }
             }
@@ -94,7 +104,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
 
     return (
         <div
-            className={`text-default-900 transition-all duration-500 ease-in-out transform ${isCollapsed ? 'w-20' : 'w-60'} fixed top-0 left-0 h-full`}
+            className={`text-default-900 transition-all duration-500 ease-in-out transform ${isCollapsed ? 'w-20' : 'w-61'} fixed top-0 left-0 h-full`}
             style={{ width: isCollapsed ? '5rem' : '17rem', backgroundColor: 'var(--color-default-900)' }}
         >
             <nav id="sidebar" className="flex flex-col justify-between h-full">
@@ -103,7 +113,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
                         {!isCollapsed ?
                             <Link href="/" className="transform transition-transform duration-300 hover:scale-105 flex items-center gap-2 p-2">
                                 <LogoIcon />
-                                <p>Expense App</p>
+                                <p id='sidebar-main-item'>{getTranslation(locale as Locale, 'sidebar.sidebarMainItem')}</p>
                             </Link>
                         : null}
                         <Tooltip 
@@ -111,11 +121,14 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
                             className='dark:text-zinc-300' 
                             content={
                                 <p className='flex flex-row items-center'>
-                                    {isCollapsed ? 'Expand' : 'Collapse'} sidebar &nbsp;
-                                <Kbd>{"["}</Kbd></p>}
+                                    {isCollapsed ? 
+                                        getTranslation(locale, "sidebar.sideBarExpandTooltip") : 
+                                        getTranslation(locale, "sidebar.sideBarCollapseTooltip")} &nbsp;
+                                    <Kbd>{getTranslation(locale, "sidebar.hotKey")}</Kbd>
+                                </p>}
                         >
-                            <Button onPress={handleIsCollapsed} size="md" isIconOnly variant="light" color="primary">
-                                <SidebarIcon />
+                            <Button onPress={handleIsCollapsed} size="lg" isIconOnly variant="light" color="primary">
+                                <SidebarIcon width={isCollapsed ? 28 : 36} height={isCollapsed ? 28 : 36} />
                             </Button>
                         </Tooltip>
                         
@@ -129,7 +142,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
                                     ${isActive(menuItem.href) ? 'dark:bg-zinc-900 bg-sky-200' : ''} transition-transform duration-500 ease-in-out
                                     box-border rounded-lg border border-transparent hover:dark:bg-zinc-800 hover:bg-sky-200`} style={{ height: '3rem' }}
                             >
-                                <Link href={menuItem.href} className="flex items-center gap-2 p-1">
+                                <Link href={menuItem.href} className="flex items-center gap-2 p-2">
                                     {menuItem.icon}
                                     {!isCollapsed && <span className="text-default-900 font-bold">{menuItem.label}</span>}
                                 </Link>

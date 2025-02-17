@@ -1,0 +1,18 @@
+{
+  "whiteListedEmails": [
+    {
+      "id": 1,
+      "email": "holyshevskyi.a@gmail.com",
+      "added": "10/02/2025",
+      "changed": "",
+      "isListed": true
+    },
+    {
+      "id": 2,
+      "email": "holyshevskyi.o@gmail.com",
+      "added": "14/02/2025",
+      "changed": "14/02/2025 19:35:57",
+      "isListed": true
+    }
+  ]
+}

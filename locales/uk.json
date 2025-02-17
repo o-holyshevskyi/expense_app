@@ -1,0 +1,42 @@
+{
+    "common": {
+        "mainFooter": "Застосунок витрат. Всі права захищені."
+    },
+    "signIn": {
+        "signInCardHeader": "Увійти",
+        "signInGoogleBtn": "Увійти з Google"
+    },
+    "sidebar": {
+        "sidebarMainItem": "Витрати",
+        "sidebarItems": [
+            "Додати витрати",
+            "Мої витрати",
+            "Змінити тему",
+            "Змінити мову"
+        ],
+        "sideBarCollapseTooltip": "Згорнути бічну панель",
+        "sideBarExpandTooltip": "Розгорнути бічну панель",
+        "hotKey": "\\"
+    },
+    "user": {
+        "signedAs": "увійшов як",
+        "userDropDownItems": [
+            "Налаштування",
+            "Вийти"
+        ]
+    },
+    "settings": {
+        "settingsTabItems": [
+            "Загальні",
+            "Керування користувачами"
+        ],
+        "whiteListedEmails": "Білий список email`ів",
+        "whiteListedEmailsTableColumns": [
+            "Email адреса",
+            "Роль",
+            "Додано",
+            "Змінено",
+            "Дозволено"
+        ]
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "common": {
+        "mainFooter": "Expense App. All rights reserved."
+    },
+    "signIn": {
+        "signInCardHeader": "Sign In",
+        "signInGoogleBtn": "Signin with Google"
+    },
+    "sidebar": {
+        "sidebarMainItem": "Expense App",
+        "sidebarItems": [
+            "Add Expenses",
+            "My Expenses",
+            "Change theme",
+            "Change language"
+        ],
+        "sideBarCollapseTooltip": "Collapse sidebar",
+        "sideBarExpandTooltip": "Expand sidebar",
+        "hotKey": "["
+    },
+    "user": {
+        "signedAs": "signed in as",
+        "userDropDownItems": [
+            "Settings",
+            "Sign Out"
+        ]
+    },
+    "settings": {
+        "settingsTabItems": [
+            "General",
+            "User Management"
+        ],
+        "whiteListedEmails": "White listed emails",
+        "whiteListedEmailsTableColumns": [
+            "Email",
+            "Role",
+            "Added",
+            "Changed",
+            "Listed"
+        ]
+    }
+}
