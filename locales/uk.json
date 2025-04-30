@@ -8,9 +8,12 @@
     },
     "sidebar": {
         "sidebarMainItem": "Витрати",
-        "sidebarItems": [
+        "topSidebarItems": [
             "Додати витрати",
             "Мої витрати",
+            "Категорії витрат"
+        ],
+        "bottomSidebarItems": [
             "Змінити тему",
             "Змінити мову"
         ],
@@ -38,5 +41,11 @@
             "Змінено",
             "Дозволено"
         ]
+    },
+    "expenseCategories": {
+        "categories": {
+            "1": "Їжа",
+            "2": "Оренда"
+        }
     }
 }

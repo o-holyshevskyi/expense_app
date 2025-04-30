@@ -33,11 +33,11 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, locale }: SidebarProps) => {
 
     const bottomSidebarMenuItems = [
         {
-            reactElement: <ThemeSwitcher translatedSideBarLabel={isCollapsed ? '' : getTranslation(locale, "sidebar.sidebarItems[2]")}/>,
+            reactElement: <ThemeSwitcher translatedSideBarLabel={isCollapsed ? '' : getTranslation(locale, "sidebar.bottomSidebarItems[0]")}/>,
             id: 'themeSwithcer'
         },
         {
-            reactElement: <LanguageSwitcher translatedSideBarLabel={isCollapsed ? '' : getTranslation(locale, "sidebar.sidebarItems[3]")} />,
+            reactElement: <LanguageSwitcher translatedSideBarLabel={isCollapsed ? '' : getTranslation(locale, "sidebar.bottomSidebarItems[1]")} />,
             id: 'languageSwithcer'
         },
         { 
