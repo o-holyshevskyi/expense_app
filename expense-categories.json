@@ -1,0 +1,16 @@
+{
+    "expenseCategories": [
+        {
+            "id": 1,
+            "title": "Food"
+        },
+        {
+            "id": 2,
+            "title": "Rent"
+        },
+        {
+            "id": 3,
+            "title": "Restaurant"
+        }
+    ]
+}

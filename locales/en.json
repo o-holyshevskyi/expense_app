@@ -8,9 +8,12 @@
     },
     "sidebar": {
         "sidebarMainItem": "Expense App",
-        "sidebarItems": [
+        "topSidebarItems": [
             "Add Expenses",
             "My Expenses",
+            "Expense categories"            
+        ],
+        "bottomSidebarItems": [
             "Change theme",
             "Change language"
         ],
@@ -38,5 +41,11 @@
             "Changed",
             "Listed"
         ]
+    },
+    "expenseCategories": {
+        "categories": {
+            "1": "Food",
+            "2": "Rent"
+        }
     }
 }
