@@ -1,6 +1,34 @@
 {
     "common": {
-        "mainFooter": "Expense App. All rights reserved."
+        "mainFooter": "Expense App. All rights reserved.",
+        "close": "Close",
+        "preview": "Preview",
+        "process": "Process",
+        "delete": "Delete",
+        "previous": "Previous",
+        "next": "Next",
+        "save": "Save",
+        "add": "Add"
+    },
+    "toast":{
+        "fileUploaded": "File uploaded",
+        "fileProcessed": "File extracted",
+        "addTransactions": {
+            "title": "Transactions added",
+            "description": "Your transactions have been added successfully."
+        },
+        "changeCategory": {
+            "title": "Category changed",
+            "description": "Your category has been changed successfully."
+        },
+        "markAsDeleted": {
+            "title": "Transaction marked as deleted",
+            "description": "Your transaction has been marked as deleted successfully."
+        },
+        "restoreTransaction": {
+            "title": "Transaction restored",
+            "description": "Your transaction has been restored successfully."
+        }
     },
     "signIn": {
         "signInCardHeader": "Sign In",
@@ -42,10 +70,91 @@
             "Listed"
         ]
     },
+    "addExpenses": {
+        "steps": [
+            "Import",
+            "Review",
+            "Save"
+        ],
+        "importStep": {
+            "description": "Import your expenses from a PDF file",
+            "uploadBtn": "Upload"
+        },
+        "reviewStep":{
+            "initialBalance": "Initial balance",
+            "totalRecieved": "Total received",
+            "totalWithdrawn": "Total withdrawn",
+            "finalBalance": "Final balance",
+            "reservationOfFunds": "Reservation of funds",
+            "availableBalance": "Available balance",
+            "charts": {
+                "expences": "Expenses by Category",
+                "income": "Income by Category"
+            }
+        },
+        "saveStep": {
+            "actions": {
+                "changeCategory": "Change category",
+                "delete": "Mark as deleted",
+                "restore": "Restore"
+            },
+            "tableColumns": {
+                "date": "Date",
+                "description": "Description",
+                "amount": "Amount",
+                "category": "Category",
+                "actions": "Actions",
+                "location": "Location",
+                "name": "Name",
+                "counterAccountNumber": "Counter account number"
+            },
+            "transactionSummary": {
+                "total": {
+                    "one": "Total {{count}} transaction",
+                    "few": "Total {{count}} transactions",
+                    "many": "Total {{count}} transactions"
+                },
+                "removed": {
+                    "none": "No deleted transactions",
+                    "one": "{{count}} transaction deleted",
+                    "few": "{{count}} transactions deleted",
+                    "many": "{{count}} transactions deleted"
+                }
+            },
+            "selectionSummary": {
+                "allSelected": "All selected",
+                "partialSelected": "{{selected}} of {{total}} selected"
+            },
+            "pagination": {
+                "rowsPerPageLabel": "Transactions per page:"
+            }
+        }
+    },
+    "modals": {
+        "markAsDeleted": {
+            "title": "Delete transaction",
+            "description": "Are you sure you want to mark as deleted this transaction?",
+            "confirmBtn": "Mark as deleted",
+            "cancelBtn": "Cancel"
+        },
+        "changeCategory": {
+            "title": "Change category",
+            "description": "Select a new category for this transaction",
+            "confirmBtn": "Change",
+            "cancelBtn": "Cancel"
+        },
+        "restoreTransaction": {
+            "title": "Restore transaction",
+            "description": "Are you sure you want to restore this transaction?",
+            "confirmBtn": "Restore",
+            "cancelBtn": "Cancel"
+        }
+    },
     "expenseCategories": {
         "categories": {
             "1": "Food",
-            "2": "Rent"
+            "2": "Rent",
+            "3": "Restaurant"
         }
     }
 }
