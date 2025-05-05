@@ -1,6 +1,34 @@
 {
     "common": {
-        "mainFooter": "Застосунок витрат. Всі права захищені."
+        "mainFooter": "Застосунок витрат. Всі права захищені.",
+        "close": "Закрити",
+        "preview": "Перегляд",
+        "process": "Обробити",
+        "delete": "Видалити",
+        "previous": "Назад",
+        "next": "Далі",
+        "save": "Зберегти",
+        "add": "Додати"
+    },
+    "toast":{
+        "fileUploaded": "Файл завантажено",
+        "fileProcessed": "Файл оброблено",
+        "addTransactions": {
+            "title": "Транзакції додано",
+            "description": "Ваші транзакції успішно додано."
+        },
+        "changeCategory": {
+            "title": "Категорію змінено",
+            "description": "Ваша категорія успішно змінена."
+        },
+        "markAsDeleted": {
+            "title": "Транзакцію помічена як видалена",
+            "description": "Ваша транзакція успішно помічена як видалена."
+        },
+        "restoreTransaction": {
+            "title": "Транзакцію відновлено",
+            "description": "Ваша транзакція успішно відновлена."
+        }
     },
     "signIn": {
         "signInCardHeader": "Увійти",
@@ -42,10 +70,91 @@
             "Дозволено"
         ]
     },
+    "addExpenses": {
+        "steps": [
+            "Імпорт",
+            "Огляд",
+            "Зберегти"
+        ],
+        "importStep": {
+            "description": "Імпортуйте свої витрати з файлу PDF",
+            "uploadBtn": "Завантажити"
+        },
+        "reviewStep":{
+            "initialBalance": "Початковий баланс",
+            "totalRecieved": "Усього отримано",
+            "totalWithdrawn": "Усього витрачено",
+            "finalBalance": "Кінцевий баланс",
+            "reservationOfFunds": "Резерв коштів",
+            "availableBalance": "Доступний баланс",
+            "charts": {
+                "expences": "Витрати за категоріями",
+                "income": "Дохід за категоріями"
+            }
+        },
+        "saveStep": {
+            "actions": {
+                "changeCategory": "Змінити категорію",
+                "delete": "Видалити",
+                "restore": "Відновити"
+            },
+            "tableColumns": {
+                "date": "Дата операції",
+                "description": "Опис операції",
+                "amount": "Сума",                         
+                "category": "Категорія",                  
+                "actions": "Дії",                         
+                "location": "Місцезнаходження",           
+                "name": "Назва отримувача/платника",      
+                "counterAccountNumber": "Рахунок контрагента"
+            },
+            "transactionSummary": {
+                "total": {
+                    "one": "Всього {{count}} транзакція",
+                    "few": "Всього {{count}} транзакції",
+                    "many": "Всього {{count}} транзакцій"
+                },
+                "removed": {
+                    "none": "Немає видалених транзакцій",
+                    "one": "Видалена {{count}} транзакція",
+                    "few": "Видалено {{count}} транзакції",
+                    "many": "Видалено {{count}} транзакцій"
+                }
+            },
+            "selectionSummary": {
+                "allSelected": "Вибрано все",
+                "partialSelected": "{{selected}} із {{total}} вибрано"
+            },
+            "pagination": {
+                "rowsPerPageLabel": "Транзакцій на сторінці:"
+            }
+        }
+    },
+    "modals": {
+        "markAsDeleted": {
+            "title": "Видалити транзакцію",
+            "description": "Ви впевнені, що хочете позначити цю транзакцію як видалену?",
+            "confirmBtn": "Позначити як видалену",
+            "cancelBtn": "Скасувати"
+        },
+        "changeCategory": {
+            "title": "Змінити категорію",
+            "description": "Оберіть нову категорію для цієї транзакції",
+            "confirmBtn": "Змінити",
+            "cancelBtn": "Скасувати"
+        },
+        "restoreTransaction": {
+            "title": "Відновити транзакцію",
+            "description": "Ви впевнені, що хочете відновити цю транзакцію?",
+            "confirmBtn": "Відновити",
+            "cancelBtn": "Скасувати"
+        }
+    },
     "expenseCategories": {
         "categories": {
             "1": "Їжа",
-            "2": "Оренда"
+            "2": "Оренда",
+            "3": "Ресторан"
         }
     }
 }

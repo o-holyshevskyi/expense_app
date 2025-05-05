@@ -3,7 +3,7 @@ import { Button, Chip, Form, Input } from "@heroui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-interface Category {
+export interface Category {
   id: number;
   title: string;
 }

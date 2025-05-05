@@ -4,11 +4,13 @@ type CardProperties = {
     header?: any;
     body: any;
     footer?: any;
+    className?: string;
+    isPressable?: boolean;
 }
 
-export default function Card({ header, body, footer }: CardProperties) {
+export default function Card({ header, body, footer, className, isPressable }: CardProperties) {
     return (
-        <UiCard className="dark:bg-zinc-900">
+        <UiCard isPressable={isPressable} className={`dark:bg-zinc-900 ${className}`}>
             <CardHeader className="dark:text-zinc-300 text-default-500 flex justify-center text-large font-bold">
                 {header}
             </CardHeader>
